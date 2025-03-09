@@ -1,0 +1,41 @@
+id: 11666
+name: circlexo
+dot-files-as-assets: true
+environments:
+    develop:
+        timeout: 30
+        memory: 1024
+        cli-memory: 512
+        database-proxy: false
+        database: circlexo-dev
+        domain:
+             - dev.circlexo.com
+        storage: circlexo-develop
+        runtime: docker
+        octane: false
+        octane-database-session-persist: true
+        cache: circlexo_cache_develop
+        build:
+            - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install'
+            - php artisan optimize
+        deploy:
+            - php artisan migrate --force
+            - php artisan queue:restart
+    production:
+        timeout: 10
+        queue-timeout: 300
+        cli-timeout: 300
+        memory: 1024
+        cli-memory: 512
+        runtime: docker
+        database: circlexo-prod
+        domain:
+          - circlexo.com
+        storage: circlexo-production
+        cache: circlexo_cache_prod
+        build:
+            - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install'
+            - php artisan optimize
+        deploy:
+            - php artisan migrate --force
+            - php artisan queue:restart

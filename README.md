@@ -199,6 +199,37 @@ CircleXO is released under the MIT License. See [LICENSE](LICENSE) for more info
 
 ---
 
+## Testing
+
+if you like to run `PEST` testing just use this command
+
+```bash
+composer db
+composer test
+```
+
+---
+
+## Code Style
+
+if you like to fix the code style just use this command
+
+```bash
+composer format
+```
+
+---
+
+## PHPStan
+
+if you like to check the code by `PHPStan` just use this command
+
+```bash
+composer analyse
+```
+
+---
+
 ## Contact
 
 For any questions, feedback, or support, feel free to reach out to us via:
