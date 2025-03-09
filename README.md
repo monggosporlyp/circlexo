@@ -189,7 +189,7 @@ We welcome contributions from the community! Whether you're a developer, designe
 
 ## Documentation
 
-For detailed information on each integration, configuration options, and advanced usage, please refer to our [official documentation](https://circlexo.readthedocs.io).
+For detailed information on each integration, configuration options, and advanced usage, please refer to our [official documentation](https://docs.3x1.io/circlexo).
 
 ---
 
