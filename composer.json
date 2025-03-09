@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "circelxo/circelxo",
+    "name": "circlexo/circlexo",
     "type": "project",
     "description": "Open-source project to seamlessly integrate and manage your business workflow, connecting Jira, GitHub, Discord, Stripe, RevenueCat, and OpenAI all in one intuitive platform.",
     "keywords": [
