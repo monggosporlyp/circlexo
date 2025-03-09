@@ -1,15 +1,33 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/livewire-starter-kit",
+    "name": "circlexo/circlexo",
     "type": "project",
-    "description": "The official Laravel starter kit for Livewire.",
+    "description": "Open-source project to seamlessly integrate and manage your business workflow, connecting Jira, GitHub, Discord, Stripe, RevenueCat, and OpenAI all in one intuitive platform.",
     "keywords": [
         "laravel",
-        "framework"
+        "framework",
+        "github",
+        "data",
+        "jira",
+        "google",
+        "stripe",
+        "forge",
+        "vapor",
+        "discord-bot",
+        "kpis",
+        "ploi",
+        "business-intelligence",
+        "revenuecat"
+    ],
+    "authors": [
+        {
+            "name": "Fady Mondy",
+            "email": "info@3x1.io"
+        }
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.2|^8.3",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "livewire/flux": "^2.0",
@@ -86,5 +104,6 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "version": "1.0.0"
 }

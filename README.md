@@ -1,3 +1,5 @@
+![CircleXO](https://raw.githubusercontent.com/circlexo/circlexo/main/master/arts/cover.jpg)
+
 # CircleXO: Unified Business Workflow Management
 
 Welcome to CircleXO, an open-source platform designed to streamline your team's workflow by integrating essential tools into a single, easy-to-use interface. CircleXO connects Jira, GitHub, Discord, Stripe, RevenueCat, and OpenAI, providing a comprehensive solution for managing your business processes all from one place.
@@ -150,3 +152,60 @@ VAPOR_TEAM_ID=
 # Webhook Secret
 WEBHOOK_SECRET=
 ```
+
+now you need to build your frontend 
+
+```bash
+php artisan filament:assets
+php artisan livewire:publish --assets
+npm i
+npm run build
+```
+
+it's time for data 
+
+```bash
+php artisan migrate
+php artisan db:seed
+php artisan optimize
+composer dev
+```
+
+## Contributing
+
+We welcome contributions from the community! Whether you're a developer, designer, or simply have ideas to improve CircleXO, we'd love to hear from you. Please follow these guidelines:
+
+1. **Fork the Repository**: Create a fork of the main repository.
+2. **Create a Branch**: Work on a new branch for your feature or fix.
+3. **Submit a Pull Request**: Once your changes are ready, submit a pull request for review.
+
+### Development Guidelines
+
+- Follow the existing code style and conventions.
+- Write clear and concise commit messages.
+- Include tests for new features or bug fixes.
+
+---
+
+## Documentation
+
+For detailed information on each integration, configuration options, and advanced usage, please refer to our [official documentation](https://circlexo.readthedocs.io).
+
+---
+
+## License
+
+CircleXO is released under the MIT License. See [LICENSE](LICENSE) for more information.
+
+---
+
+## Contact
+
+For any questions, feedback, or support, feel free to reach out to us via:
+
+- Email: [Fady Mondy](mailto:info@3x1.io)
+- GitHub Discussions: [Discuss on GitHub](https://github.com/circlexo/circlexo/discussions)
+
+---
+
+Thank you for choosing CircleXO! We hope this platform empowers your team to achieve more together.
