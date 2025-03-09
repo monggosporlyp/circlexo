@@ -1,4 +1,4 @@
-![CircleXO](https://raw.githubusercontent.com/circlexo/circlexo/main/master/arts/cover.jpg)
+![CircleXO](https://raw.githubusercontent.com/circlexo/circlexo/master/arts/cover.jpg)
 
 # CircleXO: Unified Business Workflow Management
 
