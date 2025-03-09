@@ -1,0 +1,12 @@
+providers:
+  - App\Providers\AppServiceProvider
+workbench:
+  welcome: true
+  install: true
+  start: /
+  guard: testing
+  discovers:
+    web: true
+    api: false
+    commands: false
+    views: true
