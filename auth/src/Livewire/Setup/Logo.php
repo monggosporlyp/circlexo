@@ -57,10 +57,10 @@ class Logo extends Component
             $filename = $value->getFileName();
             $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
-            $value->storeAs('auth', 'logo.'.$extension, 'public');
-            $this->logo_image_src = '/storage/auth/logo.'.$extension;
+            $value->storeAs('auth', 'logo.' . $extension, 'public');
+            $this->logo_image_src = '/storage/auth/logo.' . $extension;
 
-            $this->updateConfigKeyValue('logo.image_src', '/storage/auth/logo.'.$extension);
+            $this->updateConfigKeyValue('logo.image_src', '/storage/auth/logo.' . $extension);
 
             $value = null;
         }
@@ -76,7 +76,7 @@ class Logo extends Component
 
     private function updateConfigKeyValue($key, $value)
     {
-        \Config::write('devdojo.auth.appearance.'.$key, $value);
+        \Config::write('devdojo.auth.appearance.' . $key, $value);
         Artisan::call('config:clear');
 
         $this->js('savedMessageOpen()');

@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use TomatoPHP\FilamentLanguageSwitcher\Traits\InteractsWithLanguages;
-use Wave\User as WaveUser;
-use Illuminate\Notifications\Notifiable;
 use Wave\Traits\HasProfileKeyValues;
+use Wave\User as WaveUser;
 
 class User extends WaveUser
 {
-    use Notifiable, HasProfileKeyValues;
+    use HasProfileKeyValues;
     use InteractsWithLanguages;
+    use Notifiable;
 
     public $guard_name = 'web';
 
@@ -66,7 +67,7 @@ class User extends WaveUser
             // Remove all roles
             $user->syncRoles([]);
             // Assign the default role
-            $user->assignRole( config('wave.default_user_role', 'registered') );
+            $user->assignRole(config('wave.default_user_role', 'registered'));
         });
     }
 }

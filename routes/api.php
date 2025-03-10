@@ -13,4 +13,3 @@ Wave::api();
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/posts', '\App\Http\Controllers\Api\ApiController@posts');
 });
-

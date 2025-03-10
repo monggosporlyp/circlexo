@@ -3,37 +3,26 @@
 namespace App\Providers\Filament;
 
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+use Filament\Facades\Filament;
 use Filament\FontProviders\GoogleFontProvider;
-use TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherPlugin;
-use Wave\Widgets;
-use Filament\Pages;
-use Filament\Panel;
-use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
-use Filament\View\PanelsRenderHook;
-use Illuminate\Support\Facades\Blade;
-//use Filament\Widgets;
-// use BezhanSalleh\FilamentGoogleAnalytics\Widgets;
 use Filament\Http\Middleware\Authenticate;
-use Illuminate\Session\Middleware\StartSession;
-use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Routing\Middleware\SubstituteBindings;
-use Illuminate\Session\Middleware\AuthenticateSession;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Filament\Pages;
+use Filament\Panel;
+// use Filament\Widgets;
+// use BezhanSalleh\FilamentGoogleAnalytics\Widgets;
+use Filament\PanelProvider;
+use Filament\Support\Colors\Color;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-
-use Filament\Facades\Filament;
-use Filament\Navigation\NavigationBuilder;
-use Filament\Navigation\NavigationGroup;
-use Filament\Navigation\NavigationItem;
-
-use App\Filament\Resources\UserResource;
-use App\Filament\Resources\RoleResource;
-use App\Filament\Resources\PlanResource;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\AuthenticateSession;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherPlugin;
+use Wave\Widgets;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -93,7 +82,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->favicon(asset('favicon.ico'))
             ->brandName('CircleXO')
-            ->brandLogoHeight("25px")
+            ->brandLogoHeight('25px')
             ->brandLogo(fn () => view('wave::admin.logo'))
             ->darkModeBrandLogo(fn () => view('wave::admin.logo-dark'));
 
@@ -106,8 +95,9 @@ class AdminPanelProvider extends PanelProvider
     // This function will render if user has account crenditals file
     // located at storage/app/analytics/service-account-credentials.json
     // Find More details here: https://github.com/spatie/laravel-analytics
-    private function renderAnalyticsIfCredentialsExist(){
-        if(file_exists(storage_path('app/analytics/service-account-credentials.json'))){
+    private function renderAnalyticsIfCredentialsExist()
+    {
+        if (file_exists(storage_path('app/analytics/service-account-credentials.json'))) {
             \Config::set('filament-google-analytics.page_views.filament_dashboard', true);
             \Config::set('filament-google-analytics.active_users_one_day.filament_dashboard', true);
             \Config::set('filament-google-analytics.active_users_seven_day.filament_dashboard', true);

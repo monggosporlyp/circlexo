@@ -26,10 +26,10 @@ class Favicon extends Component
             $filename = $value->getFileName();
             $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
-            $value->storeAs('public/auth', 'favicon.'.$extension);
-            $this->favicon_light = '/storage/auth/favicon.'.$extension;
+            $value->storeAs('public/auth', 'favicon.' . $extension);
+            $this->favicon_light = '/storage/auth/favicon.' . $extension;
 
-            $this->updateConfigKeyValue('favicon.light', '/storage/auth/favicon.'.$extension);
+            $this->updateConfigKeyValue('favicon.light', '/storage/auth/favicon.' . $extension);
 
             $value = null;
         }
@@ -38,10 +38,10 @@ class Favicon extends Component
             $filename = $value->getFileName();
             $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
-            $value->storeAs('public/auth', 'favicon-dark.'.$extension);
-            $this->favicon_dark = '/storage/auth/favicon-dark.'.$extension;
+            $value->storeAs('public/auth', 'favicon-dark.' . $extension);
+            $this->favicon_dark = '/storage/auth/favicon-dark.' . $extension;
 
-            $this->updateConfigKeyValue('favicon.dark', '/storage/auth/favicon-dark.'.$extension);
+            $this->updateConfigKeyValue('favicon.dark', '/storage/auth/favicon-dark.' . $extension);
 
             $value = null;
         }
@@ -49,7 +49,7 @@ class Favicon extends Component
 
     private function updateConfigKeyValue($key, $value)
     {
-        \Config::write('devdojo.auth.appearance.'.$key, $value);
+        \Config::write('devdojo.auth.appearance.' . $key, $value);
         Artisan::call('config:clear');
         $this->js('savedMessageOpen()');
     }

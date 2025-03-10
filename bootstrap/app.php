@@ -15,10 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->appendToGroup('web', \TomatoPHP\FilamentLanguageSwitcher\Http\Middleware\LanguageMiddleware::class);
         $middleware->validateCsrfTokens([
             '/webhook/paddle',
-            '/webhook/stripe'
+            '/webhook/stripe',
         ]);
         $middleware->encryptCookies([
-            'theme'
+            'theme',
         ]);
         $middleware->redirectUsersTo('dashboard');
     })
