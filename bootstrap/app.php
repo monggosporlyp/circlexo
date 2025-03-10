@@ -11,7 +11,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->appendToGroup('web', \RalphJSmit\Livewire\Urls\Middleware\LivewireUrlsMiddleware::class);
+        $middleware->appendToGroup('web', \TomatoPHP\FilamentLanguageSwitcher\Http\Middleware\LanguageMiddleware::class);
+        $middleware->validateCsrfTokens([
+            '/webhook/paddle',
+            '/webhook/stripe'
+        ]);
+        $middleware->encryptCookies([
+            'theme'
+        ]);
+        $middleware->redirectUsersTo('dashboard');
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
