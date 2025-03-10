@@ -5,6 +5,9 @@ namespace App\Providers\Filament;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\FontProviders\GoogleFontProvider;
 use TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherPlugin;
+use TomatoPHP\FilamentMenus\FilamentMenusPlugin;
+use TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin;
+use TomatoPHP\FilamentTypes\FilamentTypesPlugin;
 use Wave\Widgets;
 use Filament\Pages;
 use Filament\Panel;
@@ -99,6 +102,9 @@ class AdminPanelProvider extends PanelProvider
 
         $panel->plugin(FilamentShieldPlugin::make());
         $panel->plugin(FilamentLanguageSwitcherPlugin::make());
+        $panel->plugin(FilamentTypesPlugin::make());
+        $panel->plugin(FilamentSettingsHubPlugin::make());
+        $panel->plugin(FilamentMenusPlugin::make());
 
         return $panel;
     }

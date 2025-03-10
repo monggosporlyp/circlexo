@@ -97,7 +97,12 @@ class Account extends AuthUser implements HasAvatar, HasMedia, JWTSubject
 
     public function getFilamentAvatarUrl(): ?string
     {
-        return $this->getFirstMediaUrl('avatar') ?? null;
+        $email = $this->email;
+        $default = "mp";
+        $size = 40;
+        $grav_url = "https://www.gravatar.com/avatar/" . hash( "sha256", strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
+
+        return $this->getFirstMediaUrl('avatar') ?: $grav_url;
     }
 
     /**

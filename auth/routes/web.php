@@ -11,7 +11,7 @@ Route::redirect('login', 'auth/login')->name('login');
 Route::redirect('register', 'auth/register')->name('register');
 
 // define the logout route
-Route::middleware(['auth', 'web'])->group(function () {
+Route::middleware(['auth:accounts', 'web'])->group(function () {
 
     Route::post('/auth/logout', LogoutController::class)
         ->name('logout');

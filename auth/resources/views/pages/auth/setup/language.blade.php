@@ -15,14 +15,14 @@ new class extends Component
     private $config;
 
     public function mount(){
-        $this->language = (object)config('devdojo.auth.language');
+        $this->language = (object)trans('circlexo.auth');
     }
 
     public function update($key, $value){
         \Config::write('devdojo.auth.language.' . $key, $value);
         Artisan::call('config:clear');
 
-        $this->language = (object)config('devdojo.auth.language');
+        $this->language = (object)trans('circlexo.auth');
         $this->js('savedMessageOpen()');
     }
 };

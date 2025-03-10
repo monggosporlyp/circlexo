@@ -13,7 +13,7 @@ trait HasConfigs
     public function loadConfigs()
     {
         $this->appearance = $this->configToArrayObject('devdojo.auth.appearance');
-        $this->language = $this->configToArrayObject('devdojo.auth.language');
+        $this->language = $this->arrayToObject(trans('circlexo.auth'));
         $this->settings = $this->configToArrayObject('devdojo.auth.settings');
     }
 

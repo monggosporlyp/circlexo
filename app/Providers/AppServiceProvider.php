@@ -5,6 +5,10 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
+use TomatoPHP\FilamentTypes\Services\Contracts\Type;
+use TomatoPHP\FilamentTypes\Services\Contracts\TypeFor;
+use TomatoPHP\FilamentTypes\Services\Contracts\TypeOf;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -56,6 +60,20 @@ class AppServiceProvider extends ServiceProvider
 
             return true;
         });
+
+
+        FilamentTypes::register([
+            TypeFor::make('home')
+                ->label('Home Sections')
+                ->types([
+                    TypeOf::make('hero-section')
+                        ->label('Hero Section'),
+                    TypeOf::make('feature-section')
+                        ->label('Feature Section'),
+                    TypeOf::make('testimonials-section')
+                        ->label('Testimonials Section')
+                ]),
+        ]);
     }
 
     private function setSchemaDefaultLength(): void

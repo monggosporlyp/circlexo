@@ -45,7 +45,10 @@ new class extends Component
         }
         return array_merge(
             $nameValidationRules,
-            ['email' => 'required|email|unique:accounts', 'phone' => 'required|string|max:15|unique:accounts'],
+            [
+                'email' => 'required|email|unique:accounts',
+                'phone' => 'required|string|max:15|unique:accounts'
+            ],
             $passwordValidationRules,
         );
     }
@@ -102,7 +105,7 @@ new class extends Component
 
         event(new Registered($user));
 
-        auth('accounts')->login($user, true);
+        auth('accounts')->login($user);
 
         if (config('devdojo.auth.settings.registration_require_email_verification')) {
             return redirect()->route('verification.notice');
@@ -120,7 +123,7 @@ new class extends Component
 
 ?>
 
-<x-auth::layouts.app title="{{ config('devdojo.auth.language.register.page_title') }}">
+<x-auth::layouts.app title="{{ trans('circlexo.auth.register.page_title') }}">
 
     @volt('auth.register')
     <x-auth::elements.container>
@@ -135,33 +138,33 @@ new class extends Component
         <form wire:submit="register" class="space-y-5">
 
             @if($showNameField)
-            <x-auth::elements.input :label="config('devdojo.auth.language.register.name')" type="text" wire:model="name" autofocus="true" required />
+            <x-auth::elements.input :label="trans('circlexo.auth.register.name')" type="text" wire:model="name" autofocus="true" required />
             @endif
 
             @if($showEmailField)
             @php
             $autofocusEmail = ($showNameField) ? false : true;
             @endphp
-            <x-auth::elements.input :label="config('devdojo.auth.language.register.email_address')" id="email" type="email" wire:model="email" data-auth="email-input" :autofocus="$autofocusEmail" required />
+            <x-auth::elements.input :label="trans('circlexo.auth.register.email_address')" id="email" type="email" wire:model="email" data-auth="email-input" :autofocus="$autofocusEmail" required />
             @endif
 
-            <x-auth::elements.input label="رقم الهاتف" id="phone" type="tel" wire:model="phone" data-auth="phone-input" required />
+            <x-auth::elements.input :label="trans('circlexo.auth.register.phone')" id="phone" type="tel" wire:model="phone" data-auth="phone-input" required />
 
 
             @if($showPasswordField)
-            <x-auth::elements.input :label="config('devdojo.auth.language.register.password')" type="password" wire:model="password" id="password" data-auth="password-input" required />
+            <x-auth::elements.input :label="trans('circlexo.auth.register.password')" type="password" wire:model="password" id="password" data-auth="password-input" required />
             @endif
 
             @if($showPasswordConfirmationField)
-            <x-auth::elements.input :label="config('devdojo.auth.language.register.password_confirmation')" type="password" wire:model="password_confirmation" id="password_confirmation" data-auth="password-confirmation-input" required />
+            <x-auth::elements.input :label="trans('circlexo.auth.register.password_confirmation')" type="password" wire:model="password_confirmation" id="password_confirmation" data-auth="password-confirmation-input" required />
             @endif
 
-            <x-auth::elements.button data-auth="submit-button" rounded="md" submit="true">{{config('devdojo.auth.language.register.button')}}</x-auth::elements.button>
+            <x-auth::elements.button data-auth="submit-button" rounded="md" submit="true">{{trans('circlexo.auth.register.button')}}</x-auth::elements.button>
         </form>
 
         <div class="mt-3 space-x-0.5 text-sm leading-5 text-left" style="color:{{ config('devdojo.auth.appearance.color.text') }}">
-            <span class="opacity-[47%]">{{config('devdojo.auth.language.register.already_have_an_account')}}</span>
-            <x-auth::elements.text-link data-auth="login-link" href="{{ route('auth.login') }}">{{config('devdojo.auth.language.register.sign_in')}}</x-auth::elements.text-link>
+            <span class="opacity-[47%]">{{trans('circlexo.auth.register.already_have_an_account')}}</span>
+            <x-auth::elements.text-link data-auth="login-link" href="{{ route('auth.login') }}">{{trans('circlexo.auth.register.sign_in')}}</x-auth::elements.text-link>
         </div>
 
         @if(config('devdojo.auth.settings.social_providers_location') != 'top')

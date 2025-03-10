@@ -46,12 +46,15 @@
         "livewire/flux": "^2.0",
         "livewire/livewire": "^3.6",
         "livewire/volt": "^1.6.7",
+        "mallardduck/blade-boxicons": "^2.4",
         "psr/simple-cache": "^3.0",
         "ralphjsmit/livewire-urls": "^1.5",
         "stripe/stripe-php": "^16.6",
         "thedevdojo/wave": "0.0.1",
         "tomatophp/filament-accounts": "^2.3",
         "tomatophp/filament-language-switcher": "^1.0",
+        "tomatophp/filament-menus": "^1.0",
+        "tomatophp/filament-settings-hub": "^2.0",
         "tymon/jwt-auth": "^2.2"
     },
     "require-dev": {

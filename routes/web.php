@@ -16,3 +16,8 @@ use Wave\Facades\Wave;
 
 // Wave routes
 Wave::routes();
+
+
+Route::middleware('web')->group(function(){
+   Route::get('/app/switcher', [\App\Http\Controllers\LanguageController::class, 'index'])->name('languages.user');
+});

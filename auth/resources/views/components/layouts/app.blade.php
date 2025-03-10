@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 <head>
     @include('auth::includes.head')
 </head>
@@ -22,7 +22,7 @@
         @endphp
 
         <main id="auth-main-content" class="flex relative z-30 flex-col justify-center w-screen min-h-screen {{ $slotParentClasses }}">
-            {{ $slot }} 
+            {{ $slot }}
         </main>
 
         @if(config('devdojo.auth.settings.enable_branding') && !app()->isLocal())

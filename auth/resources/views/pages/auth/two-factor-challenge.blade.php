@@ -21,11 +21,11 @@ name('auth.two-factor-challenge');
 new class extends Component
 {
     use HasConfigs;
-    
+
     public $recovery = false;
     public $google2fa;
 
-    #[Validate('required|min:6')] 
+    #[Validate('required|min:6')]
     public $auth_code;
     public $recovery_code;
 
@@ -46,7 +46,7 @@ new class extends Component
         return;
     }
 
-     #[On('submitCode')] 
+     #[On('submitCode')]
     public function submitCode($code)
     {
         $this->auth_code = $code;
@@ -83,7 +83,7 @@ new class extends Component
         session()->forget('login.id');
 
         event(new Login(auth()->guard('web'), $user, true));
-        
+
         if(session()->get('url.intended') != route('logout.get')){
             return redirect()->intended(config('devdojo.auth.settings.redirect_after_auth'));
         } else {
@@ -94,17 +94,17 @@ new class extends Component
 
 ?>
 
-<x-auth::layouts.app title="{{ config('devdojo.auth.language.twoFactorChallenge.page_title') }}">
+<x-auth::layouts.app title="{{ trans('circlexo.auth.twoFactorChallenge.page_title') }}">
     @volt('auth.two-factor-challenge')
         <x-auth::elements.container>
             <div x-data x-on:code-input-complete.window="console.log(event); $dispatch('submitCode', [event.detail.code])" class="relative w-full h-auto">
                 @if(!$recovery)
-                    <x-auth::elements.heading 
+                    <x-auth::elements.heading
                         :text="($language->twoFactorChallenge->headline_auth ?? 'No Heading')"
                         :description="($language->twoFactorChallenge->subheadline_auth ?? 'No Description')"
                         :show_subheadline="($language->twoFactorChallenge->show_subheadline_auth ?? false)" />
                 @else
-                    <x-auth::elements.heading 
+                    <x-auth::elements.heading
                         :text="($language->twoFactorChallenge->headline_recovery ?? 'No Heading')"
                         :description="($language->twoFactorChallenge->subheadline_recovery ?? 'No Description')"
                         :show_subheadline="($language->twoFactorChallenge->show_subheadline_recovery ?? false)" />
@@ -127,7 +127,7 @@ new class extends Component
                         <x-auth::elements.button rounded="md" submit="true" wire:click="submit_recovery_code">Continue</x-auth::elements.button>
                     @endif
 
-                    
+
                 </div>
 
                 <div class="mt-5 space-x-0.5 text-sm leading-5 text-left" style="color:{{ config('devdojo.auth.appearance.color.text') }}">

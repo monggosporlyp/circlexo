@@ -12,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->appendToGroup('web', \RalphJSmit\Livewire\Urls\Middleware\LivewireUrlsMiddleware::class);
-        $middleware->appendToGroup('web', \TomatoPHP\FilamentLanguageSwitcher\Http\Middleware\LanguageMiddleware::class);
+        $middleware->appendToGroup('web', \App\Http\Middleware\LanguageMiddleware::class);
         $middleware->validateCsrfTokens([
             '/webhook/paddle',
             '/webhook/stripe'

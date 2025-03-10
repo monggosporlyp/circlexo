@@ -14,25 +14,20 @@
         'items-start' => $heading_alignment == 'left',
         'items-center' => $heading_alignment == 'center',
         'items-end' => $heading_alignment == 'right'
-        
+
     ])
     id="auth-heading-container"
     style="color:{{ config('devdojo.auth.appearance.color.text') }}"
     >
-    <div @class([
+    <a href="{{ url('/') }}" @class([
         'flex flex-col w-full',
         'items-start' => $heading_alignment == 'left',
         'items-center' => $heading_alignment == 'center',
         'items-end' => $heading_alignment == 'right',
     ])
 >
-        <x-auth::elements.logo
-         :height="config('devdojo.auth.appearance.logo.height')"
-         :isImage="(config('devdojo.auth.appearance.logo.type') == 'image')"
-         :imageSrc="config('devdojo.auth.appearance.logo.image_src')"
-         :svgString="config('devdojo.auth.appearance.logo.svg_string')"
-         />
-    </div>
+        <x-logo class="w-16"/>
+    </a>
     <h1 id="auth-heading-title" class="mt-1 text-xl font-medium leading-9">{{ $text ?? '' }}</h1>
     @if(($description ?? false) && $show_subheadline)
         <p id="auth-heading-description" class="mb-1.5 space-x-0.5 text-sm leading-5 text-center opacity-[67%]">{{ $description ?? '' }}</p>

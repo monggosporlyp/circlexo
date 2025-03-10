@@ -8,7 +8,7 @@
 
 @php $wireModel = $attributes->get('wire:model'); @endphp
 
-<div x-data="{ 
+<div x-data="{
         focusedOrFilled: false,
         focused(){
             this.focusedOrFilled=true;
@@ -22,10 +22,10 @@
     <div class="flex relative flex-col justify-center h-11">
         <div class="flex relative">
             @if($label)
-                <label 
+                <label
                     for="{{ $id ?? '' }}"
                     @click="$refs.input.focus()"
-                    :class="{ 'top-0 -translate-y-1 ml-2 text-xs auth-component-input-label-focused' : focusedOrFilled, 'top-[16px] ml-2.5 text-[15px] text-gray-500' : !focusedOrFilled }"
+                    :class="{ 'top-0 -translate-y-1 ltr:ml-2 rtl:mr-2 text-xs auth-component-input-label-focused' : focusedOrFilled, 'top-[16px] ltr:ml-2.5 rtl:mr-2.5 text-[15px] text-gray-500' : !focusedOrFilled }"
                     class="block absolute top-0 px-1.5 py-0 font-normal leading-normal bg-white duration-300 ease-out cursor-text auth-component-input dark:text-gray-300" x-cloak>
                     {{ $label  }}
                 </label>

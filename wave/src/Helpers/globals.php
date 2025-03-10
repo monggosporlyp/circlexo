@@ -3,23 +3,6 @@
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Cache;
 
-if (!function_exists('setting')) {
-    function setting($key, $default = null)
-    {
-        static $settingsCache = null;
-
-        // Fetch all settings from cache or database
-        if ($settingsCache === null) {
-            $settingsCache = Cache::rememberForever('wave_settings', function () {
-                return Wave\Setting::pluck('value', 'key')->toArray();
-            });
-        }
-
-        // Return the requested setting or default value if not found
-        return $settingsCache[$key] ?? $default;
-    }
-}
-
 if (!function_exists('blade')) {
     function blade($string){
         return \Illuminate\Support\Facades\Blade::render($string);
@@ -44,7 +27,7 @@ if (!function_exists('getMorphAlias')) {
 if (!function_exists('has_monthly_yearly_toggle')){
     function has_monthly_yearly_toggle() : bool
     {
-        $plans = Wave\Plan::where('active', 1)->get();
+        $plans = Wave\Plan::query()->where('active', 1)->get();
         $hasMonthly = false;
         $hasYearly = false;
 

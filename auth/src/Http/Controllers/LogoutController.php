@@ -10,7 +10,7 @@ class LogoutController
 {
     public function __invoke(Request $request): RedirectResponse
     {
-        Auth::logout();
+        auth('accounts')->logout();
 
         $this->clearTraces($request);
 
@@ -19,7 +19,7 @@ class LogoutController
 
     public function getLogout(Request $request)
     {
-        Auth::logout();
+        auth('accounts')->logout();
 
         $this->clearTraces($request);
 

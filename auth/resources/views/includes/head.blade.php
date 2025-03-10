@@ -3,12 +3,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>{{ $title ?? 'Auth' }}</title>
-@if(config('devdojo.auth.settings.dev_mode'))
-    @vite(['packages/devdojo/auth/resources/css/auth.css', 'packages/devdojo/auth/resources/css/auth.js'])
-@else
-    <script src="/auth/build/assets/scripts.js"></script>
-    <link rel="stylesheet" href="/auth/build/assets/styles.css" />
-@endif
+@vite(['auth/resources/css/auth.css', 'auth/resources/css/auth.js'])
 
 @php
     $buttonRGBColor = \Devdojo\Auth\Helper::convertHexToRGBString(config('devdojo.auth.appearance.color.button'));
@@ -38,3 +33,20 @@
 <link href="{{ url(config('devdojo.auth.appearance.favicon.dark')) }}" rel="icon" media="(prefers-color-scheme: dark)" />
 
 @stack('devdojo-auth-head-scripts')
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+{{ filament()->getFontHtml() }}
+
+
+<style>
+    :root {
+        --font-family: '{!! filament()->getFontFamily() !!}';
+        --sidebar-width: {{ filament()->getSidebarWidth() }};
+        --collapsed-sidebar-width: {{ filament()->getCollapsedSidebarWidth() }};
+        --default-theme-mode: {{ filament()->getDefaultThemeMode()->value }};
+    }
+    body {
+        font-family: var(--font-family);
+    }
+</style>

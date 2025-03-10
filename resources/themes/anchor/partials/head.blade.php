@@ -6,7 +6,7 @@
 @if(isset($seo->title))
     <title>{{ $seo->title }}</title>
 @else
-    <title>{{ setting('site.title', 'Laravel Wave') . ' - ' . setting('site.description', 'The Software as a Service Starter Kit built with Laravel') }}</title>
+    <title>{{ setting('site_name', 'Laravel Wave') . ' - ' . setting('site_description', 'The Software as a Service Starter Kit built with Laravel') }}</title>
 @endif
 
 <meta charset="utf-8">
@@ -24,7 +24,7 @@
     <meta property="og:image" content="{{ $seo->image }}">
     <meta property="og:type" content="@if(isset($seo->type)){{ $seo->type }}@else{{ 'article' }}@endif">
     <meta property="og:description" content="{{ $seo->description }}">
-    <meta property="og:site_name" content="{{ setting('site.title') }}">
+    <meta property="og:site_name" content="{{ setting('site_name') }}">
 
     <meta itemprop="name" content="{{ $seo->title }}">
     <meta itemprop="description" content="{{ $seo->description }}">
@@ -46,3 +46,20 @@
 @filamentStyles
 @livewireStyles
 @vite(['resources/themes/anchor/assets/css/app.css', 'resources/themes/anchor/assets/js/app.js'])
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+{{ filament()->getFontHtml() }}
+
+
+<style>
+    :root {
+        --font-family: '{!! filament()->getFontFamily() !!}';
+        --sidebar-width: {{ filament()->getSidebarWidth() }};
+        --collapsed-sidebar-width: {{ filament()->getCollapsedSidebarWidth() }};
+        --default-theme-mode: {{ filament()->getDefaultThemeMode()->value }};
+    }
+    body {
+        font-family: var(--font-family);
+    }
+</style>

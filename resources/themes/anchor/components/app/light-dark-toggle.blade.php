@@ -1,11 +1,11 @@
-<div 
+<div
     x-data="{
         theme: 'light',
         toggle() {
-            if(this.theme == 'dark'){ 
+            if(this.theme == 'dark'){
                 this.theme = 'light';
                 localStorage.setItem('theme', 'light');
-            }else{ 
+            }else{
                 this.theme = 'dark';
                 localStorage.setItem('theme', 'dark');
             }
@@ -32,7 +32,7 @@
 >
 
     <input type="hidden" name="toggleDarkMode" :value="theme">
- 
+
     <button
         x-ref="toggle"
         type="button"
@@ -40,10 +40,10 @@
         :aria-checked="theme == 'dark'"
         :aria-labelledby="$id('toggle-label')"
         :class="(theme == 'dark') ? 'bg-zinc-700' : 'bg-slate-300'"
-        class="relative inline-flex flex-shrink-0 py-1 ml-1 transition rounded-full w-7 focus:ring-0"
+        class="relative inline-flex flex-shrink-0 py-1 ltr:ml-1 rtl:mr-1 transition rounded-full w-7 focus:ring-0"
     >
         <span
-            :class="(theme == 'dark') ? 'translate-x-[13px]' : 'translate-x-1'"
+            :class="(theme == 'dark') ? 'ltr:translate-x-[13px] rtl:-translate-x-[13px]' : 'ltr:translate-x-1 rtl:-translate-x-1'"
             class="w-3 h-3 transition bg-white rounded-full shadow-md focus:outline-none"
             aria-hidden="true"
         ></span>
@@ -52,7 +52,7 @@
     <label
         :id="$id('toggle-label')"
         :class="{ 'text-zinc-600' : theme == 'light' || theme == null, 'text-zinc-300' : theme == 'dark'  }"
-        class="flex-shrink-0 ml-1.5 font-medium cursor-pointer"
+        class="flex-shrink-0 ltr:ml-1.5 rtl:mr-1.5 font-medium cursor-pointer"
     >
         <span x-show="(theme == 'light' || theme == null)">Dark Mode</span>
         <span x-show="(theme == 'dark')">Light Mode</span>
