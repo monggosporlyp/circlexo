@@ -1,42 +1,42 @@
 <?php
 
 return [
-    "back" => "Return Back Home",
-    "marketing" => [
-        "header" => [
-            "login" => "Login",
-            "signup" => "Sign Up",
-            "profile" => "Profile"
+    'back' => 'Return Back Home',
+    'marketing' => [
+        'header' => [
+            'login' => 'Login',
+            'signup' => 'Sign Up',
+            'profile' => 'Profile',
         ],
-        "hero" => [
-            "title-main" => "Ship in Days",
-            "title-secondary" => "Not Weeks",
-            "subtitle" => "Customize this to highlight your product’s unique selling points",
-            "subtitle-hidden" => "and features",
-            "cta" => "Get Started",
-            "cta2" => "Prices Plans",
+        'hero' => [
+            'title-main' => 'Ship in Days',
+            'title-secondary' => 'Not Weeks',
+            'subtitle' => 'Customize this to highlight your product’s unique selling points',
+            'subtitle-hidden' => 'and features',
+            'cta' => 'Get Started',
+            'cta2' => 'Prices Plans',
         ],
-        "features" => [
-            "title" => "Features",
-            "description" => "Highlight the key features of your product.",
+        'features' => [
+            'title' => 'Features',
+            'description' => 'Highlight the key features of your product.',
         ],
-        "testimonials" => [
-            "title" => "Testimonials",
-            "description" => "Highlight the key features of your product.",
+        'testimonials' => [
+            'title' => 'Testimonials',
+            'description' => 'Highlight the key features of your product.',
         ],
-        "pricing" => [
-            "title" => "Pricing",
-            "description" => "Highlight the key features of your product.",
-            "subscribe" => "Subscribe",
-            "note" => "Note: All prices are in USD.",
-            "monthly" => "Monthly",
-            "yearly" => "Yearly",
+        'pricing' => [
+            'title' => 'Pricing',
+            'description' => 'Highlight the key features of your product.',
+            'subscribe' => 'Subscribe',
+            'note' => 'Note: All prices are in USD.',
+            'monthly' => 'Monthly',
+            'yearly' => 'Yearly',
         ],
-        "footer" => [
-            "copyright" => "All rights reserved.",
-        ]
+        'footer' => [
+            'copyright' => 'All rights reserved.',
+        ],
     ],
-    "auth" => [
+    'auth' => [
         'login' => [
             'page_title' => 'Sign in',
             'headline' => 'Sign in',
@@ -117,5 +117,5 @@ return [
             'subheadline_recovery' => 'Please confirm access to your account by entering one of your emergency recovery codes.',
             'show_subheadline_recovery' => false,
         ],
-    ]
+    ],
 ];

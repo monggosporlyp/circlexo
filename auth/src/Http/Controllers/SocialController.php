@@ -26,9 +26,9 @@ class SocialController
     {
         $socialProvider = $this->getProviderCredentialsWithOverrides($provider);
 
-        Config::set('services.'.$provider.'.client_id', $socialProvider->client_id);
-        Config::set('services.'.$provider.'.client_secret', $socialProvider->client_secret);
-        Config::set('services.'.$provider.'.redirect', '/auth/'.$provider.'/callback');
+        Config::set('services.' . $provider . '.client_id', $socialProvider->client_id);
+        Config::set('services.' . $provider . '.client_secret', $socialProvider->client_secret);
+        Config::set('services.' . $provider . '.redirect', '/auth/' . $provider . '/callback');
 
     }
 
@@ -39,6 +39,7 @@ class SocialController
         switch ($provider) {
             case 'facebook':
                 $socialProvider->client_id = sprintf('%d', $socialProvider->client_id);
+
                 break;
         }
 
@@ -80,8 +81,10 @@ class SocialController
         if ($user) {
             $existingProvider = $user->socialProviders()->first();
             if ($existingProvider) {
-                return redirect()->route('auth.login')->with('error',
-                    "This email is already associated with a {$existingProvider->provider_slug} account. Please login using that provider.");
+                return redirect()->route('auth.login')->with(
+                    'error',
+                    "This email is already associated with a {$existingProvider->provider_slug} account. Please login using that provider."
+                );
             }
         }
 

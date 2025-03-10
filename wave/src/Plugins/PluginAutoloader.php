@@ -2,8 +2,8 @@
 
 namespace Wave\Plugins;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class PluginAutoloader
 {
@@ -32,12 +32,14 @@ class PluginAutoloader
             $file = $base_dir . $kebab_name . '/' . $class_file;
             if (File::exists($file)) {
                 require $file;
+
                 return;
             }
 
             $src_file = $base_dir . $kebab_name . '/src/' . $class_file;
             if (File::exists($src_file)) {
                 require $src_file;
+
                 return;
             }
         });

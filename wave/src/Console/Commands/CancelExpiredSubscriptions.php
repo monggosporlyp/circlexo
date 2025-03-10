@@ -2,13 +2,14 @@
 
 namespace Wave\Console\Commands;
 
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Wave\Subscription;
-use Carbon\Carbon;
 
 class CancelExpiredSubscriptions extends Command
 {
     protected $signature = 'subscriptions:cancel-expired';
+
     protected $description = 'Cancel subscriptions that have expired';
 
     public function __construct()

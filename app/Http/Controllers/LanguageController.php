@@ -9,16 +9,16 @@ class LanguageController extends Controller
     public function index(Request $request)
     {
         $request->validate([
-            "local" => "required|string",
+            'local' => 'required|string',
         ]);
 
-        app()->setLocale($request->get("local"));
+        app()->setLocale($request->get('local'));
 
-        if(session()->has("locale")){
-            session()->forget("locale");
+        if (session()->has('locale')) {
+            session()->forget('locale');
         }
 
-        session()->put("locale", $request->get("local"));
+        session()->put('locale', $request->get('local'));
 
         return back();
     }

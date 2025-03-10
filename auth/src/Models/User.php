@@ -3,7 +3,6 @@
 namespace Devdojo\Auth\Models;
 
 use Devdojo\Auth\Traits\HasSocialProviders;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use PragmaRX\Google2FA\Google2FA;
@@ -19,7 +18,8 @@ use PragmaRX\Google2FA\Google2FA;
  */
 class User extends Authenticatable
 {
-    use HasSocialProviders, Notifiable;
+    use HasSocialProviders;
+    use Notifiable;
 
     public function hasVerifiedEmail()
     {

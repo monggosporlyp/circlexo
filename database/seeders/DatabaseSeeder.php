@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Wave\Facades\Wave;
 
 class DatabaseSeeder extends Seeder
 {
@@ -34,7 +33,7 @@ class DatabaseSeeder extends Seeder
     }
 }
 
-if (!function_exists('fixPostgresSequence')) {
+if (! function_exists('fixPostgresSequence')) {
 
     function fixPostgresSequence()
     {
@@ -53,4 +52,3 @@ if (!function_exists('fixPostgresSequence')) {
         }
     }
 }
-

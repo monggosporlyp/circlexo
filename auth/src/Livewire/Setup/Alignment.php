@@ -37,7 +37,7 @@ class Alignment extends Component
 
     private function updateConfigKeyValue($key, $value)
     {
-        \Config::write('devdojo.auth.appearance.'.$key, $value);
+        \Config::write('devdojo.auth.appearance.' . $key, $value);
         Artisan::call('config:clear');
         $this->js('savedMessageOpen()');
     }

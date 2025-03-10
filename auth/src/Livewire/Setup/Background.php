@@ -47,10 +47,10 @@ class Background extends Component
             $filename = $value->getFileName();
             $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
-            $value->storeAs('auth', 'background.'.$extension, 'public');
-            $this->image = '/storage/auth/background.'.$extension;
+            $value->storeAs('auth', 'background.' . $extension, 'public');
+            $this->image = '/storage/auth/background.' . $extension;
 
-            $this->updateConfigKeyValue('background.image', '/storage/auth/background.'.$extension);
+            $this->updateConfigKeyValue('background.image', '/storage/auth/background.' . $extension);
 
             $value = null;
         }
@@ -58,7 +58,7 @@ class Background extends Component
 
     private function updateConfigKeyValue($key, $value)
     {
-        \Config::write('devdojo.auth.appearance.'.$key, $value);
+        \Config::write('devdojo.auth.appearance.' . $key, $value);
         Artisan::call('config:clear');
 
         $this->js('savedMessageOpen()');

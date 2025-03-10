@@ -6,5 +6,5 @@ return [
     App\Providers\FolioServiceProvider::class,
     App\Providers\VoltServiceProvider::class,
     \DevDojo\Themes\ThemesServiceProvider::class,
-    Wave\WaveServiceProvider::class
+    Wave\WaveServiceProvider::class,
 ];

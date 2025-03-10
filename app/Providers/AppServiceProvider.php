@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
-use TomatoPHP\FilamentTypes\Services\Contracts\Type;
 use TomatoPHP\FilamentTypes\Services\Contracts\TypeFor;
 use TomatoPHP\FilamentTypes\Services\Contracts\TypeOf;
 
@@ -22,8 +21,6 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -49,18 +46,17 @@ class AppServiceProvider extends ServiceProvider
             );
 
             // check file format
-            if (!in_array($format, $allow)) {
+            if (! in_array($format, $allow)) {
                 return false;
             }
 
             // check base64 format
-            if (!preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', $explode[1])) {
+            if (! preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', $explode[1])) {
                 return false;
             }
 
             return true;
         });
-
 
         FilamentTypes::register([
             TypeFor::make('home')
@@ -71,7 +67,7 @@ class AppServiceProvider extends ServiceProvider
                     TypeOf::make('feature-section')
                         ->label('Feature Section'),
                     TypeOf::make('testimonials-section')
-                        ->label('Testimonials Section')
+                        ->label('Testimonials Section'),
                 ]),
         ]);
     }
@@ -80,7 +76,7 @@ class AppServiceProvider extends ServiceProvider
     {
         try {
             Schema::defaultStringLength(191);
+        } catch (\Exception $exception) {
         }
-        catch (\Exception $exception){}
     }
 }

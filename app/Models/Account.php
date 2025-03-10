@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
+use Devdojo\Auth\Models\User as AuthUser;
 use Filament\Models\Contracts\HasAvatar;
-use Filament\Panel\Concerns\HasAvatars;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Http;
 use Spatie\MediaLibrary\HasMedia;
@@ -15,7 +14,6 @@ use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Wave\Plan;
 use Wave\Subscription;
-use Devdojo\Auth\Models\User as AuthUser;
 use Wave\Traits\HasProfileKeyValues;
 
 /**
@@ -42,11 +40,11 @@ use Wave\Traits\HasProfileKeyValues;
 class Account extends AuthUser implements HasAvatar, HasMedia, JWTSubject
 {
     use HasFactory;
+    use HasProfileKeyValues;
+    use HasRoles;
     use InteractsWithMedia;
     use Notifiable;
     use SoftDeletes;
-    use HasRoles;
-    use HasProfileKeyValues;
 
     /**
      * @var array
@@ -98,16 +96,13 @@ class Account extends AuthUser implements HasAvatar, HasMedia, JWTSubject
     public function getFilamentAvatarUrl(): ?string
     {
         $email = $this->email;
-        $default = "mp";
+        $default = 'mp';
         $size = 40;
-        $grav_url = "https://www.gravatar.com/avatar/" . hash( "sha256", strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
+        $grav_url = 'https://www.gravatar.com/avatar/' . hash('sha256', strtolower(trim($email))) . '?d=' . urlencode($default) . '&s=' . $size;
 
         return $this->getFirstMediaUrl('avatar') ?: $grav_url;
     }
 
-    /**
-     * @return string|null
-     */
     public function avatar(): ?string
     {
         return $this->getFilamentAvatarUrl();
@@ -121,10 +116,9 @@ class Account extends AuthUser implements HasAvatar, HasMedia, JWTSubject
         if ($this->subscriber()) {
             return false;
         }
+
         return true;
     }
-
-
 
     public function subscriptions()
     {
@@ -139,19 +133,24 @@ class Account extends AuthUser implements HasAvatar, HasMedia, JWTSubject
     public function subscribedToPlan($planSlug)
     {
         $plan = Plan::where('name', $planSlug)->first();
-        if (!$plan) {
+        if (! $plan) {
             return false;
         }
+
         return $this->subscriptions()->where('plan_id', $plan->id)->where('status', 'active')->exists();
     }
 
-    public function plan(){
+    public function plan()
+    {
         $latest_subscription = $this->latestSubscription();
+
         return Plan::find($latest_subscription->plan_id);
     }
 
-    public function planInterval(){
+    public function planInterval()
+    {
         $latest_subscription = $this->latestSubscription();
+
         return ($latest_subscription->cycle == 'month') ? 'Monthly' : 'Yearly';
     }
 
@@ -165,45 +164,47 @@ class Account extends AuthUser implements HasAvatar, HasMedia, JWTSubject
         return $this->hasOne(Subscription::class, 'billable_id')->where('status', 'active')->orderBy('created_at', 'desc');
     }
 
-    public function switchPlans(Plan $plan){
+    public function switchPlans(Plan $plan)
+    {
         $this->syncRoles([]);
-        $this->assignRole( $plan->role->name );
+        $this->assignRole($plan->role->name);
     }
 
-    public function invoices(){
+    public function invoices()
+    {
         $user_invoices = [];
 
-        if(is_null($this->subscription)){
+        if (is_null($this->subscription)) {
             return null;
         }
 
-        if(config('wave.billing_provider') == 'stripe'){
+        if (config('wave.billing_provider') == 'stripe') {
             $stripe = new \Stripe\StripeClient(config('wave.stripe.secret_key'));
             $subscriptions = $this->subscriptions()->get();
-            foreach($subscriptions as $subscription){
-                $invoices = $stripe->invoices->all([ 'customer' => $subscription->vendor_customer_id, 'limit' => 100 ]);
+            foreach ($subscriptions as $subscription) {
+                $invoices = $stripe->invoices->all(['customer' => $subscription->vendor_customer_id, 'limit' => 100]);
 
-                foreach($invoices as $invoice){
-                    array_push($user_invoices, (object)[
+                foreach ($invoices as $invoice) {
+                    array_push($user_invoices, (object) [
                         'id' => $invoice->id,
                         'created' => \Carbon\Carbon::parse($invoice->created)->isoFormat('MMMM Do YYYY, h:mm:ss a'),
-                        'total' => number_format(($invoice->total /100), 2, '.', ' '),
-                        'download' => $invoice->invoice_pdf
+                        'total' => number_format(($invoice->total / 100), 2, '.', ' '),
+                        'download' => $invoice->invoice_pdf,
                     ]);
                 }
             }
         } else {
             $paddle_url = (config('wave.paddle.env') == 'sandbox') ? 'https://sandbox-api.paddle.com' : 'https://api.paddle.com';
             $response = Http::withToken(config('wave.paddle.api_key'))->get($paddle_url . '/transactions', [
-                'subscription_id' => $this->subscription->vendor_subscription_id
+                'subscription_id' => $this->subscription->vendor_subscription_id,
             ]);
             $responseJson = json_decode($response->body());
-            foreach($responseJson->data as $invoice){
-                array_push($user_invoices, (object)[
+            foreach ($responseJson->data as $invoice) {
+                array_push($user_invoices, (object) [
                     'id' => $invoice->id,
                     'created' => \Carbon\Carbon::parse($invoice->created_at)->isoFormat('MMMM Do YYYY, h:mm:ss a'),
-                    'total' => number_format(($invoice->details->totals->subtotal /100), 2, '.', ' '),
-                    'download' => '/settings/invoices/' . $invoice->id
+                    'total' => number_format(($invoice->details->totals->subtotal / 100), 2, '.', ' '),
+                    'download' => '/settings/invoices/' . $invoice->id,
                 ]);
             }
         }
@@ -249,8 +250,7 @@ class Account extends AuthUser implements HasAvatar, HasMedia, JWTSubject
     public function profile($key)
     {
         $keyValue = $this->profileKeyValue($key);
+
         return isset($keyValue->value) ? $keyValue->value : '';
     }
-
-
 }
