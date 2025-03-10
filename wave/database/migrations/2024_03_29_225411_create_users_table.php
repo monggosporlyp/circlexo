@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(!Schema::hasTable('users')){
+        if (! Schema::hasTable('users')) {
             Schema::create('users', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('name');
@@ -26,22 +26,21 @@ return new class extends Migration
                 $table->string('verification_code')->nullable();
                 $table->tinyInteger('verified')->nullable();
             });
-        }
-        else {
+        } else {
             Schema::table('users', function (Blueprint $table) {
-                if (!Schema::hasColumn('users', 'avatar')) {
+                if (! Schema::hasColumn('users', 'avatar')) {
                     $table->string('avatar')->default('demo/default.png');
                 }
-                if (!Schema::hasColumn('users', 'username')) {
+                if (! Schema::hasColumn('users', 'username')) {
                     $table->string('username')->unique();
                 }
-                if (!Schema::hasColumn('users', 'trial_ends_at')) {
+                if (! Schema::hasColumn('users', 'trial_ends_at')) {
                     $table->dateTime('trial_ends_at')->nullable();
                 }
-                if (!Schema::hasColumn('users', 'verification_code')) {
+                if (! Schema::hasColumn('users', 'verification_code')) {
                     $table->string('verification_code')->nullable();
                 }
-                if (!Schema::hasColumn('users', 'verified')) {
+                if (! Schema::hasColumn('users', 'verified')) {
                     $table->tinyInteger('verified')->nullable();
                 }
             });
