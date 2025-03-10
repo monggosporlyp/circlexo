@@ -32,12 +32,12 @@
                         ->label('Name')
                         ->required()
 						->rules('required|string')
-						->default(auth()->user()->name),
+						->default(auth('accounts')->user()->name),
 					\Filament\Forms\Components\TextInput::make('email')
                         ->label('Email Address')
                         ->required()
-						->rules('sometimes|required|email|unique:users,email,' . auth()->user()->id)
-						->default(auth()->user()->email),
+						->rules('sometimes|required|email|unique:users,email,' . auth('accounts')->user()->id)
+						->default(auth('accounts')->user()->email),
 					...($this->dynamicFields( config('profile.fields') ))
                 ])
                 ->statePath('data');
@@ -46,7 +46,7 @@
 		public function save()
 		{
 			$this->validate([
-				'avatar' => 'sometimes|nullable|imageable',
+				'avatar' => 'sometimes|nullable',
 			]);
 
 			$state = $this->form->getState();
@@ -65,19 +65,17 @@
 		}
 
 		private function saveNewUserAvatar(){
-			$path = 'avatars/' . auth()->user()->username . '.png';
-			$image = \Intervention\Image\ImageManagerStatic::make($this->avatar)->resize(800, 800);
-			Storage::disk('public')->put($path, $image->encode());
-			auth()->user()->avatar = $path;
-			auth()->user()->save();
+			$path = 'avatars/' . auth('accounts')->user()->username . '.png';
+            auth('accounts')->user()->clearMediaCollection('avatar');
+            auth('accounts')->user()->addMediaFromBase64($this->avatar)->toMediaCollection('avatar');
 			// This will update/refresh the avatar in the sidebar
 			$this->js('window.dispatchEvent(new CustomEvent("refresh-avatar"));');
 		}
 
 		private function saveFormFields($state){
-			auth()->user()->name = $state['name'];
-			auth()->user()->email = $state['email'];
-			auth()->user()->save();
+			auth('accounts')->user()->name = $state['name'];
+			auth('accounts')->user()->email = $state['email'];
+			auth('accounts')->user()->save();
 			$fieldsToSave = config('profile.fields');
 			$this->saveDynamicFields($fieldsToSave);
 		}
@@ -167,7 +165,7 @@
 			<form wire:submit="save" class="w-full">
 				<div class="relative flex flex-col mt-5 lg:px-10">
 					<div class="relative flex-shrink-0 w-32 h-32 cursor-pointer group">
-						<img id="preview" src="{{ auth()->user()->avatar() . '?' . time() }}" class="w-32 h-32 rounded-full">
+						<img id="preview" src="{{ auth('accounts')->user()->avatar() . '?' . time() }}" class="w-32 h-32 rounded-full">
 
 						<div class="absolute inset-0 w-full h-full">
 							<input type="file" id="upload" class="absolute inset-0 z-20 w-full h-full opacity-0 cursor-pointer group">

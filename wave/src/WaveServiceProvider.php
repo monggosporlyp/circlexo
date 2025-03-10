@@ -84,16 +84,6 @@ class WaveServiceProvider extends ServiceProvider
             'warning' => Color::Amber,
         ]);
 
-        Validator::extend('imageable', function ($attribute, $value, $params, $validator) {
-            try {
-                ImageManagerStatic::make($value);
-
-                return true;
-            } catch (\Exception $e) {
-                return false;
-            }
-        });
-
         if ($this->app->runningInConsole()) {
             $this->commands([
                 \Wave\Console\Commands\CancelExpiredSubscriptions::class,

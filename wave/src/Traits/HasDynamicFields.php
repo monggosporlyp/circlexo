@@ -66,7 +66,7 @@ trait HasDynamicFields
                 if (is_array($state[$key])) {
                     $value = json_encode($state[$key]);
                 }
-                auth()->user()->setProfileKeyValue($key, $value, $field['type']);
+                auth('accounts')->user()->setProfileKeyValue($key, $value, $field['type']);
             }
         }
     }

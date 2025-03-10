@@ -3,7 +3,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>{{ $title ?? 'Auth' }}</title>
-@vite(['auth/resources/css/auth.css', 'auth/resources/css/auth.js'])
+@vite(['auth/resources/css/auth.css', 'auth/resources/js/auth.js'])
 
 @php
     $buttonRGBColor = \Devdojo\Auth\Helper::convertHexToRGBString(config('devdojo.auth.appearance.color.button'));
